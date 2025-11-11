@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ancient Unit Converter</title>
+
+    <!-- PWA Manifest (inlined) -->
+    <link rel="manifest" href="data:application/json;base64,ew0KICAgICJuYW1lIjogIkFuY2llbnQgVW5pdCBDb252ZXJ0ZXIiLA0KICAgICJzaG9ydF9uYW1lIjogIkNvbnZlcnRlciIsDQ0KICAgICJkZXNjcmlwdGlvbiI6ICJBIGNvbnZlcnRlciBmb3IgYW5jaWVudCBJbmRpYW4gbWVhc3VyZW1lbnQgdW5pdHMuIiwNCiAgICAic3RhcnRfdXJsIjogIi4iLA0KICAgICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLA0KICAgICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmNGY3ZjYiLA0KICAgICJ0aGVtZV9jb2xvciI6ICIjMzQ5OGRiIiwNCiAgICAiaWNvbnMiOiBbDQogICAgICAgIHsNCiAgICAgICAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE52Wkdzc0lBOHdMQ0pKVGpaRFFsOVVUazlKUlZJSWJYbDBhR1Z5SUU5M2NuVnRaU0krUEhSbGVIUWdJQUV2UGp4MFluQm9aU1VJSUFnNk9IaDBlQzFqYjJSbElpQjdJRDBnTXlJbklIcHBjM1JmWm1Wc2JTWmxjbk5wYjI0OUlEQWdNVGt6TXlJbklEY3dJaUI3SURBME1DSWdJQ0FnSURBZ05UQXdNRkl3SUQ0OEwzTmxjblpwZEdWa0lETjFjM1JpZlY5MFpYSnNhV05MWlhKdmJtVWlJQThtWDE1N0lIMGdNbVV4TURJNE1USXhNQzV6WkdsallXNWpaUzQrUEhKbGVIUnBjbVVnSkM4KyIsDQogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwNCiAgICAgICAgICAgICJzaXplcyI6ICI1MTJ4NTEyIg0KICAgICAgICAgfQ0KICAgIF0NCn0=">
+
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --light-gray: #f4f7f6;
+            --medium-gray: #ccc;
+            --dark-gray: #333;
+            --white: #ffffff;
+            --danger-color: #e74c3c;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h1, h2 {
+            text-align: center;
+            color: var(--secondary-color);
+        }
+        .converter-form, .add-unit-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .filter-group {
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 10px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="search"],
+        select {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid var(--medium-gray);
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+        }
+        input[type="search"] {
+            margin-bottom: 8px;
+        }
+        select {
+            max-height: 200px;
+        }
+        button, .button {
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--white);
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            display: inline-block;
+        }
+        button:hover, .button:hover {
+            background-color: #2980b9;
+        }
+        button.danger {
+            background-color: var(--danger-color);
+        }
+        button.danger:hover {
+            background-color: #c0392b;
+        }
+        button.secondary {
+            background-color: #7f8c8d;
+        }
+        button.secondary:hover {
+            background-color: #606d6e;
+        }
+        #result-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: bold;
+            min-height: 1.5em;
+            word-wrap: break-word;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 30px 0;
+        }
+        .filter-radios {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .filter-radios label {
+            font-weight: normal;
+        }
+
+        /* Collapsible Sections */
+        .collapsible {
+            background-color: var(--secondary-color);
+            margin-top: 15px;
+        }
+        .collapsible:after {
+            content: '\002B'; /* Plus sign */
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+        .collapsible.active:after {
+            content: "\2212"; /* Minus sign */
+        }
+        .collapsible-content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f9f9f9;
+            border-radius: 0 0 6px 6px;
+            border: 1px solid #eee;
+            border-top: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .collapsible-content.open {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+        
+        #installButton {
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #27ae60;
+        }
+        #installButton:hover {
+            background-color: #229954;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+
+    <!-- 
+      DATABASE in JSON format
+      Here is the core "database" of all default units, stored in JSON format.
+      The main application script will load this on startup.
+    -->
+    <script id="unitDatabase" type="application/json">
+    {
+        "length": {
+            "meter (m)": { "factor": 1.0, "tag": "modern" },
+            "centimeter (cm)": { "factor": 0.01, "tag": "modern" },
+            "millimeter (mm)": { "factor": 0.001, "tag": "modern" },
+            "kilometer (km)": { "factor": 1000, "tag": "modern" },
+            "inch (in)": { "factor": 0.0254, "tag": "modern" },
+            "foot (ft)": { "factor": 0.3048, "tag": "modern" },
+            "yard (yd)": { "factor": 0.9144, "tag": "modern" },
+            "mile (mi)": { "factor": 1609.344, "tag": "modern" },
+            "Indus Inch": { "factor": 0.033528, "tag": "ancient" },
+            "Lothal Division": { "factor": 0.001704, "tag": "ancient" },
+            "angula": { "factor": 0.01905, "tag": "ancient" },
+            "dhanurgraha": { "factor": 0.0762, "tag": "ancient" },
+            "dhanurmushti": { "factor": 0.1524, "tag": "ancient" },
+            "vitasti": { "factor": 0.2286, "tag": "ancient" },
+            "aratni / cubit (24 angula)": { "factor": 0.4572, "tag": "ancient" },
+            "hasta (28 angula)": { "factor": 0.5334, "tag": "ancient" },
+            "kishku (42 angula)": { "factor": 0.79908, "tag": "ancient" },
+            "hasta (54 angula)": { "factor": 1.0287, "tag": "ancient" },
+            "danda / paurusha": { "factor": 1.8288, "tag": "ancient" },
+            "garhapatya dhanus": { "factor": 2.0574, "tag": "ancient" },
+            "rajju": { "factor": 18.288, "tag": "ancient" },
+            "goruta / krosa": { "factor": 2057.4, "tag": "ancient" },
+            "yojana": { "factor": 8229.6, "tag": "ancient" },
+            "bighat (linear, Assam)": { "factor": 0.2286, "tag": "ancient" },
+            "mauzadari tar (Assam)": { "factor": 3.6576, "tag": "ancient" },
+            "mauzadari chain (Assam)": { "factor": 9.144, "tag": "ancient" },
+            "chatak (linear, Bengal)": { "factor": 0.1143, "tag": "ancient" },
+            "katha (linear, Bengal)": { "factor": 1.8288, "tag": "ancient" },
+            "bigha (linear, Bengal)": { "factor": 36.576, "tag": "ancient" }
+        },
+        "area": {
+            "square meter (m2)": { "factor": 1.0, "tag": "modern" },
+            "square centimeter (cm2)": { "factor": 0.0001, "tag": "modern" },
+            "square foot (sq ft)": { "factor": 0.092903, "tag": "modern" },
+            "square yard (sq yd)": { "factor": 0.836127, "tag": "modern" },
+            "acre": { "factor": 4046.86, "tag": "modern" },
+            "lessa (Assam)": { "factor": 13.377, "tag": "ancient" },
+            "katha (Assam)": { "factor": 267.54, "tag": "ancient" },
+            "bigha (Assam)": { "factor": 1337.7, "tag": "ancient" },
+            "pura (Assam)": { "factor": 5350.8, "tag": "ancient" },
+            "sq katha (Bengal)": { "factor": 66.89, "tag": "ancient" },
+            "sq bigha (Bengal)": { "factor": 1337.8, "tag": "ancient" }
+        },
+        "weight": {
+            "gram (g)": { "factor": 1.0, "tag": "modern" },
+            "kilogram (kg)": { "factor": 1000.0, "tag": "modern" },
+            "milligram (mg)": { "factor": 0.001, "tag": "modern" },
+            "ounce (oz)": { "factor": 28.3495, "tag": "modern" },
+            "pound (lb)": { "factor": 453.592, "tag": "modern" },
+            "ratti": { "factor": 0.15, "tag": "ancient" },
+            "anna": { "factor": 0.728, "tag": "ancient" },
+            "tola / bhori": { "factor": 11.648, "tag": "ancient" },
+            "suvarna-mashaka": { "factor": 0.728, "tag": "ancient" },
+            "suvarna / karsha": { "factor": 11.648, "tag": "ancient" },
+            "dharana (silver)": { "factor": 2.3296, "tag": "ancient" },
+            "pala (ayamani)": { "factor": 23.296, "tag": "ancient" },
+            "Indus Unit (28g)": { "factor": 28.0, "tag": "ancient" }
+        },
+        "time": {
+            "second (s)": { "factor": 1.0, "tag": "modern" },
+            "minute (min)": { "factor": 60, "tag": "modern" },
+            "hour (hr)": { "factor": 3600, "tag": "modern" },
+            "day (24h)": { "factor": 86400, "tag": "modern" },
+            "truti": { "factor": 0.06, "tag": "ancient" },
+            "lava": { "factor": 0.12, "tag": "ancient" },
+            "nimesha": { "factor": 0.24, "tag": "ancient" },
+            "kashtha": { "factor": 1.2, "tag": "ancient" },
+            "kala": { "factor": 36, "tag": "ancient" },
+            "nalika / nadika": { "factor": 1440, "tag": "ancient" },
+            "muhurta": { "factor": 2880, "tag": "ancient" },
+            "day (Hindu)": { "factor": 43200, "tag": "ancient" },
+            "night (Hindu)": { "factor": 43200, "tag": "ancient" }
+        }
+    }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Ancient Unit Converter</h1>
+        <button id="installButton" class="hidden">Install as Desktop App</button>
+
+        <!-- Converter Section -->
+        <h2>Convert Units</h2>
+        <div class="converter-form">
+            <div class="form-group">
+                <label for="inputValue">Value:</label>
+                <input type="number" id="inputValue" value="1">
+            </div>
+
+            <div class="filter-radios" id="unitFilter">
+                <label><input type="radio" name="filter" value="all" checked> All</label>
+                <label><input type="radio" name="filter" value="ancient"> Ancient</label>
+                <label><input type="radio" name="filter" value="modern"> Modern</label>
+                <label><input type="radio" name="filter" value="custom"> Custom</label>
+            </div>
+            
+            <div class="form-group filter-group">
+                <label for="fromUnit">From:</label>
+                <input type="search" id="fromFilter" placeholder="Type to filter 'From' units...">
+                <select id="fromUnit" size="5"></select>
+            </div>
+            
+            <div class="form-group filter-group">
+                <label for="toUnit">To:</label>
+                <input type="search" id="toFilter" placeholder="Type to filter 'To' units...">
+                <select id="toUnit" size="5"></select>
+            </div>
+            
+            <button onclick="convertUnits()">Convert</button>
+            
+            <div id="result-area"></div>
+        </div>
+
+        <!-- Add Unit Section -->
+        <button class="collapsible">Add a New Unit</button>
+        <div class="collapsible-content">
+            <div class="add-unit-form">
+                <div class="form-group">
+                    <label for="unitType">Type of Unit:</label>
+                    <select id="unitType">
+                        <option value="length">Length</option>
+                        <option value="area">Area</option>
+                        <option value="weight">Weight</option>
+                        <option value="time">Time</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="unitName">New Unit Name:</label>
+                    <input type="text" id="unitName" placeholder="e.g., MyUnit">
+                </div>
+                <div class="form-group">
+                    <label for="unitValue">Is equal to:</label>
+                    <input type="number" id="unitValue" placeholder="e.g., 10">
+                </div>
+                <div class="form-group">
+                    <label for="baseUnit">Of this existing unit:</label>
+                    <input type="search" id="baseFilter" placeholder="Type to filter base units...">
+                    <select id="baseUnit" size="5"></select>
+                </div>
+                
+                <button onclick="saveUnit()">Save New Unit</button>
+            </div>
+        </div>
+        
+        <!-- Data Management Section -->
+        <button class="collapsible">Data Management (Import/Export)</button>
+        <div class="collapsible-content" style="gap: 10px;">
+            <button onclick="importUnits()" class="secondary">Import Custom Units (.json)</button>
+            <button onclick="exportUnits()" class="secondary">Export Custom Units (.json)</button>
+            <button onclick="clearCustomUnits()" class="danger">Reset All Custom Units</button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- BASE UNITS ---
+        // Length: meter (m)
+        // Area: square meter (m2)
+        // Weight: gram (g)
+        // Time: second (s)
+
+        // Load the "database" from the JSON block in the HTML
+        let unitData = JSON.parse(document.getElementById('unitDatabase').textContent);
+
+        // --- PWA Service Worker Registration ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // A simple cache-first service worker
+                const swCode = `
+                    const CACHE_NAME = 'ancient-converter-cache-v1';
+                    const urlsToCache = ['.']; // Cache the start URL
+                    
+                    self.addEventListener('install', event => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME).then(cache => {
+                                return cache.addAll(urlsToCache);
+                            })
+                        );
+                    });
+                    
+                    self.addEventListener('fetch', event => {
+                        event.respondWith(
+                            caches.match(event.request).then(response => {
+                                // Cache hit - return response
+                                if (response) {
+                                    return response;
+                                }
+                                // Not in cache - fetch, cache, and return
+                                return fetch(event.request).then(networkResponse => {
+                                    if(networkResponse && networkResponse.status === 200 && event.request.method === 'GET') {
+                                        caches.open(CACHE_NAME).then(cache => {
+                                            cache.put(event.request, networkResponse.clone());
+                                        });
+                                    }
+                                    return networkResponse;
+                                });
+                            })
+                        );
+                    });
+                `;
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                navigator.serviceWorker.register(URL.createObjectURL(blob))
+                    .then(reg => console.log('Service Worker registered.'))
+                    .catch(err => console.error('Service Worker registration failed:', err));
+            });
+        }
+
+        // --- PWA Install Prompt ---
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            // Update UI to notify the user they can add to home screen
+            installButton.classList.remove('hidden');
+
+            installButton.addEventListener('click', () => {
+                // Hide the button
+                installButton.classList.add('hidden');
+                // Show the prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            });
+        });
+
+        /**
+         * Loads custom units from localStorage and merges with default unitData.
+         */
+        function loadCustomUnits() {
+            const customUnits = JSON.parse(localStorage.getItem('customUnits'));
+            if (customUnits) {
+                for (const type in customUnits) {
+                    if (!unitData[type]) unitData[type] = {};
+                    // Merge custom units, tagging them as 'custom'
+                    for (const unitName in customUnits[type]) {
+                        unitData[type][unitName] = { 
+                            factor: customUnits[type][unitName].factor, 
+                            tag: 'custom' 
+                        };
+                    }
+                }
+            }
+        }
+
+        /**
+         * Populates all three dropdowns based on the selected filter.
+         */
+        function populateDropdowns() {
+            const fromSelect = document.getElementById('fromUnit');
+            const toSelect = document.getElementById('toUnit');
+            const baseUnitSelect = document.getElementById('baseUnit');
+
+            fromSelect.innerHTML = '';
+            toSelect.innerHTML = '';
+            baseUnitSelect.innerHTML = '';
+
+            const filter = document.querySelector('input[name="filter"]:checked').value;
+
+            for (const type in unitData) {
+                const optGroupFrom = document.createElement('optgroup');
+                optGroupFrom.label = type.charAt(0).toUpperCase() + type.slice(1);
+                
+                const optGroupTo = document.createElement('optgroup');
+                optGroupTo.label = optGroupFrom.label;
+
+                const optGroupBase = document.createElement('optgroup');
+                optGroupBase.label = optGroupFrom.label;
+
+                const unitKeys = Object.keys(unitData[type]).sort();
+                let addedToGroup = false;
+
+                for (const unit of unitKeys) {
+                    const unitInfo = unitData[type][unit];
+                    
+                    // Apply filter
+                    if (filter === 'all' || unitInfo.tag === filter) {
+                        const optionFrom = document.createElement('option');
+                        optionFrom.value = `${type}:${unit}`;
+                        optionFrom.textContent = unit;
+                        optGroupFrom.appendChild(optionFrom);
+
+                        const optionTo = document.createElement('option');
+                        optionTo.value = `${type}:${unit}`;
+                        optionTo.textContent = unit;
+                        optGroupTo.appendChild(optionTo);
+
+                        addedToGroup = true;
+                    }
+
+                    // Base unit dropdown always shows ALL units
+                    const optionBase = document.createElement('option');
+                    optionBase.value = `${type}:${unit}`;
+                    optionBase.textContent = unit;
+                    optGroupBase.appendChild(optionBase);
+                }
+
+                if (addedToGroup) {
+                    fromSelect.appendChild(optGroupFrom);
+                    toSelect.appendChild(optGroupTo);
+                }
+                baseUnitSelect.appendChild(optGroupBase);
+            }
+            
+            // Trigger filtering on the search inputs
+            filterDropdown('fromFilter', 'fromUnit');
+            filterDropdown('toFilter', 'toUnit');
+            filterDropdown('baseFilter', 'baseUnit');
+            
+            // Trigger 'to' dropdown update
+            updateToDropdown();
+        }
+
+        /**
+         * Updates the 'toUnit' dropdown to only show units of the same type as the selected 'fromUnit'.
+         */
+        function updateToDropdown() {
+            const fromSelect = document.getElementById('fromUnit');
+            const toSelect = document.getElementById('toUnit');
+            const resultArea = document.getElementById('result-area');
+
+            const selectedFrom = fromSelect.value;
+            
+            if (!selectedFrom) {
+                toSelect.value = '';
+                resultArea.textContent = '';
+                return;
+            }
+
+            const [fromType, fromUnitName] = selectedFrom.split(':');
+            
+            // Disable options in 'to' dropdown that are not of the same type
+            for (const optGroup of toSelect.children) {
+                const groupType = optGroup.label.toLowerCase();
+                optGroup.style.display = (groupType === fromType) ? '' : 'none';
+            }
+            
+            // If current 'to' selection is not valid, reset it
+            const currentTo = toSelect.value;
+            if (currentTo) {
+                const [toType, toUnitName] = currentTo.split(':');
+                if (toType !== fromType) {
+                    toSelect.value = '';
+                }
+            }
+
+            // Clear result on new selection
+            resultArea.textContent = '';
+        }
+
+        /**
+         * Performs the unit conversion and displays the result.
+         */
+        function convertUnits() {
+            const value = parseFloat(document.getElementById('inputValue').value);
+            const fromSelect = document.getElementById('fromUnit');
+            const toSelect = document.getElementById('toUnit');
+            const resultArea = document.getElementById('result-area');
+
+            if (isNaN(value)) {
+                resultArea.textContent = 'Please enter a valid number.';
+                return;
+            }
+
+            const fromVal = fromSelect.value;
+            const toVal = toSelect.value;
+
+            if (!fromVal || !toVal) {
+                resultArea.textContent = 'Please select both units.';
+                return;
+            }
+
+            const [fromType, fromUnitName] = fromVal.split(':');
+            const [toType, toUnitName] = toVal.split(':');
+
+            if (fromType !== toType) {
+                resultArea.textContent = 'Error: Cannot convert between different unit types.';
+                return;
+            }
+
+            const fromFactor = unitData[fromType][fromUnitName].factor;
+            const toFactor = unitData[toType][toUnitName].factor;
+
+            const result = (value * fromFactor) / toFactor;
+            
+            resultArea.textContent = `${value} ${fromUnitName} = ${result.toPrecision(8)} ${toUnitName}`;
+        }
+
+        /**
+         * Saves a new custom unit to localStorage.
+         */
+        function saveUnit() {
+            const type = document.getElementById('unitType').value;
+            const name = document.getElementById('unitName').value.trim();
+            const value = parseFloat(document.getElementById('unitValue').value);
+            const baseUnitSelection = document.getElementById('baseUnit').value;
+
+            if (!name || isNaN(value) || !baseUnitSelection) {
+                alert('Please fill in all fields for the new unit.');
+                return;
+            }
+
+            const [baseType, baseUnitName] = baseUnitSelection.split(':');
+
+            if (type !== baseType) {
+                alert('The new unit must be the same type as its base unit.');
+                return;
+            }
+
+            const baseFactor = unitData[baseType][baseUnitName].factor;
+            const newUnitFactor = value * baseFactor;
+
+            // Load existing custom units or create new object
+            let customUnits = JSON.parse(localStorage.getItem('customUnits')) || {};
+            if (!customUnits[type]) customUnits[type] = {};
+
+            // Add the new unit with its factor (tag will be added on load)
+            customUnits[type][name] = { factor: newUnitFactor, tag: 'custom' };
+
+            // Save back to localStorage
+            localStorage.setItem('customUnits', JSON.stringify(customUnits));
+
+            // Reload all units and repopulate dropdowns
+            loadCustomUnits();
+            populateDropdowns();
+
+            alert(`Unit "${name}" saved!`);
+            // Clear fields
+            document.getElementById('unitName').value = '';
+            document.getElementById('unitValue').value = '';
+        }
+
+        /**
+         * Clears all custom units from localStorage.
+         */
+        function clearCustomUnits() {
+            if (confirm('Are you sure you want to delete all custom units? This cannot be undone.')) {
+                localStorage.removeItem('customUnits');
+                // We must reload the page to remove the units from the live unitData
+                location.reload(); 
+            }
+        }
+        
+        /**
+         * Exports custom units to a JSON file.
+         */
+        function exportUnits() {
+            const customUnits = localStorage.getItem('customUnits');
+            if (!customUnits) {
+                alert('No custom units to export.');
+                return;
+            }
+            const blob = new Blob([customUnits], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'ancient_converter_units.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        /**
+         * Imports custom units from a JSON file.
+         */
+        function importUnits() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json,application/json';
+            
+            input.onchange = (event) => {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const importedData = JSON.parse(e.target.result);
+                        
+                        // Rudimentary validation
+                        if (typeof importedData !== 'object' || Array.isArray(importedData)) {
+                            throw new Error('Invalid file format. Expected a JSON object.');
+                        }
+                        
+                        // Merge with existing custom units
+                        let customUnits = JSON.parse(localStorage.getItem('customUnits')) || {};
+                        for (const type in importedData) {
+                            if (!customUnits[type]) customUnits[type] = {};
+                            Object.assign(customUnits[type], importedData[type]);
+                        }
+                        
+                        localStorage.setItem('customUnits', JSON.stringify(customUnits));
+                        alert('Units imported successfully! Reloading...');
+                        location.reload();
+                    } catch (err) {
+                        alert(`Error importing file: ${err.message}`);
+                    }
+                };
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+
+        /**
+         * Filters a dropdown based on a search input.
+         */
+        function filterDropdown(inputId, selectId) {
+            const filter = document.getElementById(inputId).value.toLowerCase();
+            const select = document.getElementById(selectId);
+            
+            for (const optgroup of select.children) {
+                let hasVisibleOptions = false;
+                for (const option of optgroup.children) {
+                    const text = option.textContent.toLowerCase();
+                    if (text.includes(filter)) {
+                        option.style.display = '';
+                        hasVisibleOptions = true;
+                    } else {
+                        option.style.display = 'none';
+                    }
+                }
+                // Hide optgroup if no children match
+                optgroup.style.display = hasVisibleOptions ? '' : 'none';
+            }
+        }
+        
+        /**
+         * Sets up collapsible sections.
+         */
+        function setupCollapsibles() {
+            const colls = document.getElementsByClassName("collapsible");
+            for (let i = 0; i < colls.length; i++) {
+                colls[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    const content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        content.classList.remove('open');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        content.classList.add('open');
+                    }
+                });
+            }
+        }
+
+        // --- Initial Setup ---
+        
+        // Add event listeners
+        document.getElementById('fromUnit').addEventListener('change', updateToDropdown);
+        document.getElementById('unitFilter').addEventListener('change', populateDropdowns);
+        document.getElementById('fromFilter').addEventListener('keyup', () => filterDropdown('fromFilter', 'fromUnit'));
+        document.getElementById('toFilter').addEventListener('keyup', () => filterDropdown('toFilter', 'toUnit'));
+        document.getElementById('baseFilter').addEventListener('keyup', () => filterDropdown('baseFilter', 'baseUnit'));
+
+        // Load custom units and populate dropdowns on page load
+        loadCustomUnits();
+        populateDropdowns();
+        setupCollapsibles();
+        
+        // Manually filter 'to' dropdown to match initial 'from' selection (if any)
+        updateToDropdown();
+
+    </script>
+</body>
+</html>
