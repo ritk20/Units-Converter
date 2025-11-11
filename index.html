@@ -6,138 +6,239 @@
     <title>Ancient Unit Converter</title>
 
     <!-- PWA Manifest (inlined) -->
-    <link rel="manifest" href="data:application/json;base64,ew0KICAgICJuYW1lIjogIkFuY2llbnQgVW5pdCBDb252ZXJ0ZXIiLA0KICAgICJzaG9ydF9uYW1lIjogIkNvbnZlcnRlciIsDQ0KICAgICJkZXNjcmlwdGlvbiI6ICJBIGNvbnZlcnRlciBmb3IgYW5jaWVudCBJbmRpYW4gbWVhc3VyZW1lbnQgdW5pdHMuIiwNCiAgICAic3RhcnRfdXJsIjogIi4iLA0KICAgICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLA0KICAgICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmNGY3ZjYiLA0KICAgICJ0aGVtZV9jb2xvciI6ICIjMzQ5OGRiIiwNCiAgICAiaWNvbnMiOiBbDQogICAgICAgIHsNCiAgICAgICAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE52Wkdzc0lBOHdMQ0pKVGpaRFFsOVVUazlKUlZJSWJYbDBhR1Z5SUU5M2NuVnRaU0krUEhSbGVIUWdJQUV2UGp4MFluQm9aU1VJSUFnNk9IaDBlQzFqYjJSbElpQjdJRDBnTXlJbklIcHBjM1JmWm1Wc2JTWmxjbk5wYjI0OUlEQWdNVGt6TXlJbklEY3dJaUI3SURBME1DSWdJQ0FnSURBZ05UQXdNRkl3SUQ0OEwzTmxjblpwZEdWa0lETjFjM1JpZlY5MFpYSnNhV05MWlhKdmJtVWlJQThtWDE1N0lIMGdNbVV4TURJNE1USXhNQzV6WkdsallXNWpaUzQrUEhKbGVIUnBjbVVnSkM4KyIsDQogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwNCiAgICAgICAgICAgICJzaXplcyI6ICI1MTJ4NTEyIg0KICAgICAgICAgfQ0KICAgIF0NCn0=">
+    <link rel="manifest" href="data:application/json;base64,ew0KICAgICJuYW1lIjogIkFuY2llbnQgVW5pdCBDb252ZXJ0ZXIiLA0KICAgICJzaG9ydF9uYW1lIjogIkNvbnZlcnRlciIsDQ0KICAgICJkZXNjcmlwdGlvbiI6ICJBIGNvbnZlcnRlciBmb3IgYW5jaWVudCBJbmRpYW4gbWVhc3VyZW1lbnQgdW5pdHMuIiwNCiAgICAic3RhcnRfdXJsIjogIi4iLA0KICAgICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLA0KICAgICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmN2Y5ZmMiLA0KICAgICJ0aGVtZV9jb2xvciI6ICIjMTA3NUY5IiwNCiAgICAiaWNvbnMiOiBbDQogICAgICAgIHsNCiAgICAgICAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE52Wkdzc0lBOHdMQ0pKVGpaRFFsOVVUazlKUlZJSWJYbDBhR1Z5SUU5M2NuVnRaU0krUEhSbGVIUWdJQUV2UGp4MFluQm9aU1VJSUFnNk9IaDBlQzFqYjJSbElpQjdJRDBnTXlJbklIcHBjM1JmWm1Wc2JTWmxjbk5wYjI0OUlEQWdNVGt6TXlJbklEY3dJaUI3SURBME1DSWdJQ0FnSURBZ05UQXdNRkl3SUQ0OEwzTmxjblpwZEdWa0lETjFjM1JpZlY5MFpYSnNhV05MWlhKdmJtVWlJQThtWDE1N0lIMGdNbVV4TURJNE1USXhNQzV6WkdsallXNWpaUzQrUEhKbGVIUnBjbVVnSkM4KyIsDQogICAgICAgICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiwNCiAgICAgICAgICAgICJzaXplcyI6ICI1MTJ4NTEyIg0KICAgICAgICAgfQ0KICAgIF0NCn0=">
+    
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --light-gray: #f4f7f6;
-            --medium-gray: #ccc;
-            --dark-gray: #333;
+            --primary-color: #0c66e4;
+            --primary-light: #e9f2ff;
+            --secondary-color: #172B4D; /* Dark blue-gray for text */
+            --light-gray: #F7F9FC;
+            --medium-gray: #dfe1e6;
             --white: #ffffff;
-            --danger-color: #e74c3c;
+            --danger-color: #de350b;
+            --danger-light: #ffebe6;
+            --success-color: #00875A;
+            --success-light: #e6fef7;
+            --secondary-dark: #44546f;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.05);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: var(--font-main);
             line-height: 1.6;
             background-color: var(--light-gray);
-            color: var(--dark-gray);
+            color: var(--secondary-color);
             margin: 0;
             padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         .container {
             max-width: 600px;
             margin: 0 auto;
             background: var(--white);
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #ebecf0;
         }
-        h1, h2 {
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .header svg {
+            width: 32px;
+            height: 32px;
+            color: var(--primary-color);
+        }
+
+        h1 {
             text-align: center;
             color: var(--secondary-color);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 0;
         }
+        
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--secondary-color);
+            border-bottom: 1px solid var(--medium-gray);
+            padding-bottom: 8px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
         .converter-form, .add-unit-form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
         }
         .form-group {
             display: flex;
             flex-direction: column;
+            gap: 8px; /* Added gap for filters */
         }
-        .filter-group {
-            border: 1px solid #eee;
-            border-radius: 6px;
-            padding: 10px;
-        }
+        
         label {
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
         }
+        
         input[type="text"],
         input[type="number"],
         input[type="search"],
         select {
-            padding: 10px;
+            padding: 12px;
             font-size: 1rem;
             border: 1px solid var(--medium-gray);
-            border-radius: 4px;
+            border-radius: var(--radius-md);
             width: 100%;
-            box-sizing: border-box; /* Ensures padding doesn't affect width */
+            box-sizing: border-box;
+            background-color: var(--white);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
-        input[type="search"] {
-            margin-bottom: 8px;
-        }
+        
+        /* Style for standard select (dropdown) */
         select {
-            max-height: 200px;
+             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2344546f'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 1.25em;
+            padding-right: 2.5em; /* Make space for arrow */
         }
+        
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="search"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+        
         button, .button {
-            padding: 12px 20px;
+            padding: 14px 20px;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 500;
             color: var(--white);
             background-color: var(--primary-color);
             border: none;
-            border-radius: 4px;
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            text-align: center;
-            display: inline-block;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
         }
         button:hover, .button:hover {
-            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+        button:active {
+            transform: translateY(0);
+        }
+
         button.danger {
             background-color: var(--danger-color);
         }
         button.danger:hover {
-            background-color: #c0392b;
+            background-color: #bf2600;
         }
         button.secondary {
-            background-color: #7f8c8d;
+            background-color: var(--secondary-dark);
         }
         button.secondary:hover {
-            background-color: #606d6e;
+            background-color: var(--secondary-color);
         }
+
         #result-area {
+            display: none;
             margin-top: 20px;
-            padding: 15px;
-            background-color: var(--light-gray);
-            border-radius: 4px;
+            padding: 20px;
+            background-color: var(--success-light);
+            border: 1px solid var(--success-color);
+            color: var(--success-color);
+            border-radius: var(--radius-md);
             font-size: 1.2rem;
             text-align: center;
-            font-weight: bold;
+            font-weight: 500;
             min-height: 1.5em;
             word-wrap: break-word;
         }
-        hr {
-            border: 0;
-            height: 1px;
-            background: #ddd;
-            margin: 30px 0;
-        }
+        
+        /* Filter Radios as Pills */
         .filter-radios {
             display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--medium-gray);
+            width: 100%;
+        }
+        .filter-radios input[type="radio"] {
+            display: none;
         }
         .filter-radios label {
-            font-weight: normal;
+            flex: 1;
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            background: var(--white);
+            color: var(--secondary-dark);
+            transition: all 0.2s ease;
+            border-right: 1px solid var(--medium-gray);
+        }
+        .filter-radios label:last-child {
+            border-right: none;
+        }
+        .filter-radios input[type="radio"]:checked + label {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        .filter-radios label:hover:not(:has(input:checked)) {
+            background-color: #f4f5f7;
         }
 
         /* Collapsible Sections */
         .collapsible {
-            background-color: var(--secondary-color);
+            background-color: var(--white);
+            color: var(--secondary-color);
+            border: 1px solid var(--medium-gray);
             margin-top: 15px;
+            text-align: left;
+        }
+        .collapsible:hover {
+            background-color: #f4f5f7;
+            transform: translateY(-2px);
         }
         .collapsible:after {
             content: '\002B'; /* Plus sign */
             font-weight: bold;
             float: right;
             margin-left: 5px;
+            font-size: 1.2rem;
         }
         .collapsible.active:after {
             content: "\2212"; /* Minus sign */
@@ -147,26 +248,25 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.2s ease-out;
-            background-color: #f9f9f9;
-            border-radius: 0 0 6px 6px;
-            border: 1px solid #eee;
+            background-color: var(--white);
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            border: 1px solid var(--medium-gray);
             border-top: none;
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
         .collapsible-content.open {
-            padding-top: 15px;
-            padding-bottom: 15px;
+            padding: 20px;
         }
         
         #installButton {
             width: 100%;
             margin-bottom: 20px;
-            background-color: #27ae60;
+            background-color: var(--success-color);
         }
         #installButton:hover {
-            background-color: #229954;
+            background-color: #006644;
         }
         .hidden {
             display: none;
@@ -176,7 +276,6 @@
     <!-- 
       DATABASE in JSON format
       Here is the core "database" of all default units, stored in JSON format.
-      The main application script will load this on startup.
     -->
     <script id="unitDatabase" type="application/json">
     {
@@ -260,7 +359,15 @@
 <body>
 
     <div class="container">
-        <h1>Ancient Unit Converter</h1>
+        
+        <div class="header">
+            <!-- Inlined SVG icon for a balance scale, fitting the theme -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C11.4477 2 11 2.44772 11 3V6.26182C8.75133 6.8159 7 8.69233 7 11.05V18H3C2.44772 18 2 18.4477 2 19C2 19.5523 2.44772 20 3 20H21C21.5523 20 22 19.5523 22 19C22 18.4477 21.5523 18 21 18H17V11.05C17 8.69233 15.2487 6.8159 13 6.26182V3C13 2.44772 12.5523 2 12 2ZM5 18V11.05C5 7.74714 7.42371 5.1388 10.5 4.3168V5C10.5 5.55228 10.9477 6 11.5 6C12.0523 6 12.5 5.55228 12.5 5V4.3168C15.5763 5.1388 18 7.74714 18 11.05V18H5Z"/>
+            </svg>
+            <h1>Ancient Unit Converter</h1>
+        </div>
+        
         <button id="installButton" class="hidden">Install as Desktop App</button>
 
         <!-- Converter Section -->
@@ -270,24 +377,36 @@
                 <label for="inputValue">Value:</label>
                 <input type="number" id="inputValue" value="1">
             </div>
-
-            <div class="filter-radios" id="unitFilter">
-                <label><input type="radio" name="filter" value="all" checked> All</label>
-                <label><input type="radio" name="filter" value="ancient"> Ancient</label>
-                <label><input type="radio" name="filter" value="modern"> Modern</label>
-                <label><input type="radio" name="filter" value="custom"> Custom</label>
-            </div>
             
-            <div class="form-group filter-group">
+            <div class="form-group">
                 <label for="fromUnit">From:</label>
-                <input type="search" id="fromFilter" placeholder="Type to filter 'From' units...">
-                <select id="fromUnit" size="5"></select>
+                <div class="filter-radios" id="fromFilter">
+                    <input type="radio" name="fromFilter" value="all" id="fromFilterAll" checked>
+                    <label for="fromFilterAll">All</label>
+                    <input type="radio" name="fromFilter" value="ancient" id="fromFilterAncient">
+                    <label for="fromFilterAncient">Ancient</label>
+                    <input type="radio" name="fromFilter" value="modern" id="fromFilterModern">
+                    <label for="fromFilterModern">Modern</label>
+                    <input type="radio" name="fromFilter" value="custom" id="fromFilterCustom">
+                    <label for="fromFilterCustom">Custom</label>
+                </div>
+                <select id="fromUnit"></select>
             </div>
             
-            <div class="form-group filter-group">
+            <div class="form-group">
                 <label for="toUnit">To:</label>
-                <input type="search" id="toFilter" placeholder="Type to filter 'To' units...">
-                <select id="toUnit" size="5"></select>
+                <div class="filter-radios" id="toFilter">
+                    <input type="radio" name="toFilter" value="all" id="toFilterAll" checked>
+                    <label for="toFilterAll">All</label>
+                    <input type="radio" name="toFilter" value="ancient" id="toFilterAncient">
+                    <label for="toFilterAncient">Ancient</label>
+                    <input type="radio" name="toFilter" value="modern" 
+                    id="toFilterModern">
+                    <label for="toFilterModern">Modern</label>
+                    <input type="radio" name="toFilter" value="custom" id="toFilterCustom">
+                    <label for="toFilterCustom">Custom</label>
+                </div>
+                <select id="toUnit"></select>
             </div>
             
             <button onclick="convertUnits()">Convert</button>
@@ -317,9 +436,8 @@
                     <input type="number" id="unitValue" placeholder="e.g., 10">
                 </div>
                 <div class="form-group">
-                    <label for="baseUnit">Of this existing unit:</label>
-                    <input type="search" id="baseFilter" placeholder="Type to filter base units...">
-                    <select id="baseUnit" size="5"></select>
+                    <label for="baseUnit">Of this existing unit (base units):</label>
+                    <select id="baseUnit"></select>
                 </div>
                 
                 <button onclick="saveUnit()">Save New Unit</button>
@@ -351,7 +469,7 @@
             window.addEventListener('load', () => {
                 // A simple cache-first service worker
                 const swCode = `
-                    const CACHE_NAME = 'ancient-converter-cache-v1';
+                    const CACHE_NAME = 'ancient-converter-cache-v3'; // Incremented cache version
                     const urlsToCache = ['.']; // Cache the start URL
                     
                     self.addEventListener('install', event => {
@@ -360,6 +478,21 @@
                                 return cache.addAll(urlsToCache);
                             })
                         );
+                    });
+
+                    // Clean up old caches
+                    self.addEventListener('activate', event => {
+                      event.waitUntil(
+                        caches.keys().then(cacheNames => {
+                          return Promise.all(
+                            cacheNames.filter(cacheName => {
+                              return cacheName !== CACHE_NAME;
+                            }).map(cacheName => {
+                              return caches.delete(cacheName);
+                            })
+                          );
+                        })
+                      );
                     });
                     
                     self.addEventListener('fetch', event => {
@@ -394,19 +527,12 @@
         const installButton = document.getElementById('installButton');
         
         window.addEventListener('beforeinstallprompt', (e) => {
-            // Prevent Chrome 67 and earlier from automatically showing the prompt
             e.preventDefault();
-            // Stash the event so it can be triggered later.
             deferredPrompt = e;
-            // Update UI to notify the user they can add to home screen
             installButton.classList.remove('hidden');
-
             installButton.addEventListener('click', () => {
-                // Hide the button
                 installButton.classList.add('hidden');
-                // Show the prompt
                 deferredPrompt.prompt();
-                // Wait for the user to respond to the prompt
                 deferredPrompt.userChoice.then((choiceResult) => {
                     if (choiceResult.outcome === 'accepted') {
                         console.log('User accepted the install prompt');
@@ -426,7 +552,6 @@
             if (customUnits) {
                 for (const type in customUnits) {
                     if (!unitData[type]) unitData[type] = {};
-                    // Merge custom units, tagging them as 'custom'
                     for (const unitName in customUnits[type]) {
                         unitData[type][unitName] = { 
                             factor: customUnits[type][unitName].factor, 
@@ -438,77 +563,71 @@
         }
 
         /**
-         * Populates all three dropdowns based on the selected filter.
+         * Populates a single unit dropdown based on a filter.
+         * @param {string} selectId - The ID of the <select> element (e.g., 'fromUnit')
+         * @param {string} filter - The tag to filter by ('all', 'ancient', 'modern', 'custom')
          */
-        function populateDropdowns() {
-            const fromSelect = document.getElementById('fromUnit');
-            const toSelect = document.getElementById('toUnit');
-            const baseUnitSelect = document.getElementById('baseUnit');
-
-            fromSelect.innerHTML = '';
-            toSelect.innerHTML = '';
-            baseUnitSelect.innerHTML = '';
-
-            const filter = document.querySelector('input[name="filter"]:checked').value;
+        function updateUnitList(selectId, filter) {
+            const select = document.getElementById(selectId);
+            const currentVal = select.value; // Preserve current selection
+            select.innerHTML = '';
 
             for (const type in unitData) {
-                const optGroupFrom = document.createElement('optgroup');
-                optGroupFrom.label = type.charAt(0).toUpperCase() + type.slice(1);
+                const optGroup = document.createElement('optgroup');
+                optGroup.label = type.charAt(0).toUpperCase() + type.slice(1);
                 
-                const optGroupTo = document.createElement('optgroup');
-                optGroupTo.label = optGroupFrom.label;
-
-                const optGroupBase = document.createElement('optgroup');
-                optGroupBase.label = optGroupFrom.label;
-
-                const unitKeys = Object.keys(unitData[type]).sort();
                 let addedToGroup = false;
+                const unitKeys = Object.keys(unitData[type]).sort();
 
                 for (const unit of unitKeys) {
                     const unitInfo = unitData[type][unit];
                     
-                    // Apply filter
                     if (filter === 'all' || unitInfo.tag === filter) {
-                        const optionFrom = document.createElement('option');
-                        optionFrom.value = `${type}:${unit}`;
-                        optionFrom.textContent = unit;
-                        optGroupFrom.appendChild(optionFrom);
-
-                        const optionTo = document.createElement('option');
-                        optionTo.value = `${type}:${unit}`;
-                        optionTo.textContent = unit;
-                        optGroupTo.appendChild(optionTo);
-
+                        const option = document.createElement('option');
+                        option.value = `${type}:${unit}`;
+                        option.textContent = unit;
+                        optGroup.appendChild(option);
                         addedToGroup = true;
                     }
-
-                    // Base unit dropdown always shows ALL units
-                    const optionBase = document.createElement('option');
-                    optionBase.value = `${type}:${unit}`;
-                    optionBase.textContent = unit;
-                    optGroupBase.appendChild(optionBase);
                 }
 
                 if (addedToGroup) {
-                    fromSelect.appendChild(optGroupFrom);
-                    toSelect.appendChild(optGroupTo);
+                    select.appendChild(optGroup);
                 }
-                baseUnitSelect.appendChild(optGroupBase);
             }
             
-            // Trigger filtering on the search inputs
-            filterDropdown('fromFilter', 'fromUnit');
-            filterDropdown('toFilter', 'toUnit');
-            filterDropdown('baseFilter', 'baseUnit');
+            // Try to restore previous selection
+            if (Array.from(select.options).some(opt => opt.value === currentVal)) {
+                select.value = currentVal;
+            }
+        }
+        
+        /**
+         * Populates the 'baseUnit' dropdown (always shows all units).
+         */
+        function populateBaseUnitList() {
+            const select = document.getElementById('baseUnit');
+            select.innerHTML = ''; // Clear existing
             
-            // Trigger 'to' dropdown update
-            updateToDropdown();
+            for (const type in unitData) {
+                const optGroup = document.createElement('optgroup');
+                optGroup.label = type.charAt(0).toUpperCase() + type.slice(1);
+                
+                const unitKeys = Object.keys(unitData[type]).sort();
+                for (const unit of unitKeys) {
+                    const option = document.createElement('option');
+                    option.value = `${type}:${unit}`;
+                    option.textContent = unit;
+                    optGroup.appendChild(option);
+                }
+                select.appendChild(optGroup);
+            }
         }
 
         /**
-         * Updates the 'toUnit' dropdown to only show units of the same type as the selected 'fromUnit'.
+         * Ensures the 'To' dropdown only shows units of the same TYPE as the 'From' dropdown.
          */
-        function updateToDropdown() {
+        function syncToDropdownType() {
             const fromSelect = document.getElementById('fromUnit');
             const toSelect = document.getElementById('toUnit');
             const resultArea = document.getElementById('result-area');
@@ -516,30 +635,30 @@
             const selectedFrom = fromSelect.value;
             
             if (!selectedFrom) {
-                toSelect.value = '';
                 resultArea.textContent = '';
+                // Show all optgroups if nothing is selected
+                Array.from(toSelect.children).forEach(optGroup => optGroup.style.display = '');
                 return;
             }
 
             const [fromType, fromUnitName] = selectedFrom.split(':');
             
-            // Disable options in 'to' dropdown that are not of the same type
-            for (const optGroup of toSelect.children) {
+            // Hide/show optgroups in 'to' dropdown
+            Array.from(toSelect.children).forEach(optGroup => {
                 const groupType = optGroup.label.toLowerCase();
                 optGroup.style.display = (groupType === fromType) ? '' : 'none';
-            }
+            });
             
             // If current 'to' selection is not valid, reset it
             const currentTo = toSelect.value;
             if (currentTo) {
                 const [toType, toUnitName] = currentTo.split(':');
                 if (toType !== fromType) {
-                    toSelect.value = '';
+                    toSelect.value = ''; // Reset selection
                 }
             }
 
-            // Clear result on new selection
-            resultArea.textContent = '';
+            resultArea.textContent = ''; // Clear result on change
         }
 
         /**
@@ -550,7 +669,8 @@
             const fromSelect = document.getElementById('fromUnit');
             const toSelect = document.getElementById('toUnit');
             const resultArea = document.getElementById('result-area');
-
+            
+            resultArea.style.display = 'block'; // Ensure result area is visible
             if (isNaN(value)) {
                 resultArea.textContent = 'Please enter a valid number.';
                 return;
@@ -593,6 +713,12 @@
                 alert('Please fill in all fields for the new unit.');
                 return;
             }
+            
+            if (unitData[type] && unitData[type][name]) {
+                if (!confirm(`A unit named "${name}" already exists. Do you want to overwrite it?`)) {
+                    return;
+                }
+            }
 
             const [baseType, baseUnitName] = baseUnitSelection.split(':');
 
@@ -604,22 +730,20 @@
             const baseFactor = unitData[baseType][baseUnitName].factor;
             const newUnitFactor = value * baseFactor;
 
-            // Load existing custom units or create new object
             let customUnits = JSON.parse(localStorage.getItem('customUnits')) || {};
             if (!customUnits[type]) customUnits[type] = {};
-
-            // Add the new unit with its factor (tag will be added on load)
             customUnits[type][name] = { factor: newUnitFactor, tag: 'custom' };
-
-            // Save back to localStorage
             localStorage.setItem('customUnits', JSON.stringify(customUnits));
 
             // Reload all units and repopulate dropdowns
             loadCustomUnits();
-            populateDropdowns();
+            const fromFilter = document.querySelector('input[name="fromFilter"]:checked').value;
+            const toFilter = document.querySelector('input[name="toFilter"]:checked').value;
+            updateUnitList('fromUnit', fromFilter);
+            updateUnitList('toUnit', toFilter);
+            populateBaseUnitList();
 
             alert(`Unit "${name}" saved!`);
-            // Clear fields
             document.getElementById('unitName').value = '';
             document.getElementById('unitValue').value = '';
         }
@@ -630,7 +754,6 @@
         function clearCustomUnits() {
             if (confirm('Are you sure you want to delete all custom units? This cannot be undone.')) {
                 localStorage.removeItem('customUnits');
-                // We must reload the page to remove the units from the live unitData
                 location.reload(); 
             }
         }
@@ -669,13 +792,10 @@
                 reader.onload = (e) => {
                     try {
                         const importedData = JSON.parse(e.target.result);
-                        
-                        // Rudimentary validation
                         if (typeof importedData !== 'object' || Array.isArray(importedData)) {
                             throw new Error('Invalid file format. Expected a JSON object.');
                         }
                         
-                        // Merge with existing custom units
                         let customUnits = JSON.parse(localStorage.getItem('customUnits')) || {};
                         for (const type in importedData) {
                             if (!customUnits[type]) customUnits[type] = {};
@@ -696,29 +816,6 @@
         }
 
         /**
-         * Filters a dropdown based on a search input.
-         */
-        function filterDropdown(inputId, selectId) {
-            const filter = document.getElementById(inputId).value.toLowerCase();
-            const select = document.getElementById(selectId);
-            
-            for (const optgroup of select.children) {
-                let hasVisibleOptions = false;
-                for (const option of optgroup.children) {
-                    const text = option.textContent.toLowerCase();
-                    if (text.includes(filter)) {
-                        option.style.display = '';
-                        hasVisibleOptions = true;
-                    } else {
-                        option.style.display = 'none';
-                    }
-                }
-                // Hide optgroup if no children match
-                optgroup.style.display = hasVisibleOptions ? '' : 'none';
-            }
-        }
-        
-        /**
          * Sets up collapsible sections.
          */
         function setupCollapsibles() {
@@ -731,7 +828,7 @@
                         content.style.maxHeight = null;
                         content.classList.remove('open');
                     } else {
-                        content.style.maxHeight = content.scrollHeight + "px";
+                        content.style.maxHeight = content.scrollHeight + 40 + "px"; // 40 for padding
                         content.classList.add('open');
                     }
                 });
@@ -741,19 +838,28 @@
         // --- Initial Setup ---
         
         // Add event listeners
-        document.getElementById('fromUnit').addEventListener('change', updateToDropdown);
-        document.getElementById('unitFilter').addEventListener('change', populateDropdowns);
-        document.getElementById('fromFilter').addEventListener('keyup', () => filterDropdown('fromFilter', 'fromUnit'));
-        document.getElementById('toFilter').addEventListener('keyup', () => filterDropdown('toFilter', 'toUnit'));
-        document.getElementById('baseFilter').addEventListener('keyup', () => filterDropdown('baseFilter', 'baseUnit'));
+        document.getElementById('fromUnit').addEventListener('change', syncToDropdownType);
+        
+        document.getElementById('fromFilter').addEventListener('change', (e) => {
+            updateUnitList('fromUnit', e.target.value);
+            syncToDropdownType(); // Re-sync type display
+        });
+        
+        document.getElementById('toFilter').addEventListener('change', (e) => {
+            updateUnitList('toUnit', e.target.value);
+            syncToDropdownType(); // Re-sync type display
+        });
+
 
         // Load custom units and populate dropdowns on page load
         loadCustomUnits();
-        populateDropdowns();
+        updateUnitList('fromUnit', 'all');
+        updateUnitList('toUnit', 'all');
+        populateBaseUnitList();
         setupCollapsibles();
         
         // Manually filter 'to' dropdown to match initial 'from' selection (if any)
-        updateToDropdown();
+        syncToDropdownType();
 
     </script>
 </body>
